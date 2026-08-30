@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Body Art Cabaret | A Traveling Company of Artful Performance</title>
+<meta name="description" content="Body Art Cabaret is a traveling ensemble blending burlesque, aerial art, and visual spectacle into one touring stage show.">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<!-- Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+  :root{
+    --void:#130910;
+    --plum:#2A1122;
+    --velvet:#54132F;
+    --velvet-light:#7A1F3D;
+    --gold:#C9A24B;
+    --gold-soft:#E4CD97;
+    --blush:#E7B7BE;
+    --ivory:#F4EBDD;
+    --font-marquee:'Bebas Neue', sans-serif;
+    --font-display:'Cormorant Garamond', serif;
+    --font-body:'EB Garamond', serif;
+  }
+
+  *{box-sizing:border-box;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--void);
+    color:var(--ivory);
+    font-family:var(--font-body);
+    font-size:1.08rem;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.font-display{font-family:var(--font-display); font-weight:600;}
+  .font-marquee{font-family:var(--font-marquee); letter-spacing:.14em;}
+
+  a{color:var(--gold-soft); text-decoration:none;}
+  a:hover{color:var(--gold);}
+
+  ::selection{background:var(--gold); color:var(--void);}
+
+  /* ---------- Curtain Intro ---------- */
+  .curtain{
+    position:fixed; inset:0; z-index:9999; display:flex; pointer-events:none;
+  }
+  .curtain-panel{
+    width:50%; height:100%;
+    background:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 6px, transparent 6px 26px),
+      linear-gradient(180deg,#7A1F3D 0%, #4A0F28 55%, #2A0A18 100%);
+    box-shadow:inset 0 0 120px rgba(0,0,0,.6);
+    animation: curtain-open 1.6s .3s cubic-bezier(.77,0,.18,1) forwards;
+  }
+  .curtain-panel.right{animation-name:curtain-open-right;}
+  .curtain-panel::after{
+    content:"";
+    position:absolute; top:0; bottom:0; width:14px;
+    background:linear-gradient(90deg, rgba(201,162,75,.9), rgba(201,162,75,.15));
+  }
+  .curtain-panel.left::after{right:0;}
+  .curtain-panel.right::after{left:0;}
+  @keyframes curtain-open{ to { transform:translateX(-102%); } }
+  @keyframes curtain-open-right{ to { transform:translateX(102%); } }
+
+  @media (prefers-reduced-motion: reduce){
+    .curtain{display:none;}
+  }
+
+  /* ---------- Marquee bulb divider ---------- */
+  .bulb-row{
+    display:flex; justify-content:center; gap:.6rem; padding:1.2rem 0;
+  }
+  .bulb-row span{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--gold-soft);
+    box-shadow:0 0 6px 2px rgba(228,205,151,.65);
+    animation:twinkle 2.4s ease-in-out infinite;
+  }
+  .bulb-row span:nth-child(odd){animation-delay:.6s;}
+  @media (prefers-reduced-motion: reduce){ .bulb-row span{animation:none;} }
+  @keyframes twinkle{ 0%,100%{opacity:.35;} 50%{opacity:1;} }
+
+  /* ---------- Nav ---------- */
+  .navbar{
+    background:rgba(19,9,16,.85);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(201,162,75,.25);
+    padding-top:.9rem; padding-bottom:.9rem;
+  }
+  .navbar-brand{
+    font-family:var(--font-marquee);
+    font-size:1.5rem;
+    letter-spacing:.18em;
+    color:var(--gold-soft) !important;
+  }
+  .navbar-brand span{color:var(--blush);}
+  .nav-link{
+    font-family:var(--font-marquee);
+    font-size:.85rem;
+    letter-spacing:.12em;
+    color:var(--ivory) !important;
+    margin:0 .5rem;
+  }
+  .nav-link:hover{color:var(--gold) !important;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 20%, rgba(122,31,61,.55), transparent 70%),
+      radial-gradient(ellipse 80% 60% at 50% 100%, rgba(84,19,47,.4), transparent 70%),
+      var(--void);
+    padding-top:6rem;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-radial-gradient(circle at 50% 0, rgba(201,162,75,.05) 0 2px, transparent 2px 40px);
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-family:var(--font-marquee);
+    letter-spacing:.35em;
+    color:var(--blush);
+    font-size:.85rem;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem, 7vw, 6rem);
+    font-style:italic;
+    color:var(--ivory);
+    line-height:1.05;
+    margin:.6rem 0 1.2rem;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:transparent;
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    -webkit-background-clip:text; background-clip:text;
+  }
+  .hero-sub{
+    max-width:520px;
+    font-size:1.15rem;
+    color:#D9C8CE;
+  }
+  .btn-gold{
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    color:var(--void); border:none; font-family:var(--font-marquee);
+    letter-spacing:.12em; padding:.75rem 1.8rem; border-radius:2px;
+  }
+  .btn-gold:hover{background:var(--gold-soft); color:var(--void);}
+  .btn-outline-gold{
+    border:1px solid var(--gold); color:var(--gold-soft);
+    font-family:var(--font-marquee); letter-spacing:.12em;
+    padding:.75rem 1.8rem; border-radius:2px; background:transparent;
+  }
+  .btn-outline-gold:hover{background:rgba(201,162,75,.12); color:var(--gold-soft);}
+
+  .frame-badge{
+    border:1px solid rgba(201,162,75,.5);
+    padding:1.4rem;
+    text-align:center;
+    font-family:var(--font-marquee);
+    letter-spacing:.1em;
+  }
+  .frame-badge .num{
+    font-family:var(--font-display); font-style:italic; font-size:2.2rem; color:var(--gold-soft); display:block;
+  }
+
+  /* ---------- Section shells ---------- */
+  section{padding:6rem 0;}
+  .section-plum{background:var(--plum);}
+  .section-velvet{background:linear-gradient(180deg, var(--velvet) 0%, #3d0f24 100%);}
+  .eyebrow{
+    font-family:var(--font-marquee); letter-spacing:.3em; font-size:.8rem; color:var(--blush);
+  }
+  .section-title{
+    font-size:clamp(2rem,4vw,3rem); font-style:italic; margin-bottom:1.4rem;
+  }
+  .lede{max-width:680px; color:#DCCBD1;}
+
+  /* ---------- Act cards ---------- */
+  .act-card{
+    background:rgba(244,235,221,.03);
+    border:1px solid rgba(201,162,75,.22);
+    padding:2.2rem 1.8rem;
+    height:100%;
+    transition:transform .35s ease, border-color .35s ease, background .35s ease;
+  }
+  .act-card:hover{
+    transform:translateY(-6px);
+    border-color:rgba(201,162,75,.6);
+    background:rgba(244,235,221,.06);
+  }
+  .act-card i{color:var(--gold-soft); font-size:1.6rem; margin-bottom:1rem;}
+  .act-card h3{font-size:1.4rem; margin-bottom:.6rem;}
+  .act-card p{color:#CDB9C0; font-size:.98rem; margin:0;}
+
+  /* ---------- Tour ticker / route ---------- */
+  .route{
+    position:relative;
+    padding-left:2.2rem;
+    border-left:1px dashed rgba(201,162,75,.45);
+  }
+  .stop{position:relative; padding-bottom:2.6rem;}
+  .stop:last-child{padding-bottom:0;}
+  .stop::before{
+    content:"";
+    position:absolute; left:-2.5rem; top:.35rem;
+    width:12px; height:12px; border-radius:50%;
+    background:var(--gold-soft);
+    box-shadow:0 0 0 4px rgba(201,162,75,.18);
+  }
+  .stop .stop-label{
+    font-family:var(--font-marquee); letter-spacing:.15em; color:var(--gold-soft); font-size:.85rem;
+  }
+  .stop h3{margin:.3rem 0 .4rem; font-size:1.6rem;}
+  .stop p{color:#D3C2C8; margin:0;}
+
+  /* ---------- Gallery swatches ---------- */
+  .swatch{
+    aspect-ratio:4/5;
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(201,162,75,.3);
+  }
+  .swatch::before{
+    content:"";
+    position:absolute; inset:0;
+  }
+  .swatch .cap{
+    position:absolute; left:0; right:0; bottom:0;
+    padding:.9rem 1rem;
+    font-family:var(--font-marquee); letter-spacing:.1em; font-size:.8rem;
+    background:linear-gradient(180deg, transparent, rgba(19,9,16,.85));
+    color:var(--gold-soft);
+  }
+  .sw1::before{background:radial-gradient(circle at 30% 20%, #7A1F3D, #2A0A18 75%);}
+  .sw2::before{background:radial-gradient(circle at 70% 30%, #C9A24B33, #2A0A18 75%);}
+  .sw3::before{background:radial-gradient(circle at 50% 70%, #54132F, #150B12 80%);}
+  .sw4::before{background:radial-gradient(circle at 40% 60%, #E7B7BE22, #150B12 80%);}
+
+  /* ---------- Booking CTA ---------- */
+  .booking{
+    background:
+      radial-gradient(ellipse 70% 80% at 50% 0%, rgba(201,162,75,.14), transparent 70%),
+      var(--void);
+    text-align:center;
+    border-top:1px solid rgba(201,162,75,.25);
+    border-bottom:1px solid rgba(201,162,75,.25);
+  }
+  .booking h2{font-size:clamp(2.2rem,5vw,3.4rem); font-style:italic;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--void);
+    padding:4rem 0 2rem;
+    border-top:1px solid rgba(201,162,75,.15);
+    font-size:.95rem;
+    color:#B9A6AD;
+  }
+  footer h4{
+    font-family:var(--font-marquee); letter-spacing:.12em; color:var(--gold-soft);
+    font-size:.9rem; margin-bottom:1rem;
+  }
+  footer a{color:#CDB9C0;}
+  footer a:hover{color:var(--gold-soft);}
+  .footer-note{
+    border-top:1px solid rgba(201,162,75,.12);
+    margin-top:2.5rem; padding-top:1.5rem;
+    font-size:.82rem; color:#8A7580;
+  }
+</style>
+</head>
+<body>
+
+<!-- Curtain intro -->
+<div class="curtain" aria-hidden="true">
+  <div class="curtain-panel left"></div>
+  <div class="curtain-panel right"></div>
+</div>
+
+<!-- NAV -->
+<nav class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#top">BODY ART <span>CABARET</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" style="border-color:rgba(201,162,75,.5);">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="nav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#about">The Company</a></li>
+        <li class="nav-item"><a class="nav-link" href="#acts">The Acts</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tour">On Tour</a></li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#booking">Book Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="container">
+    <div class="row justify-content-center text-center">
+      <div class="col-lg-9">
+        <div class="hero-eyebrow">A TOURING COMPANY OF LIVE ARTFUL PERFORMANCE</div>
+        <h1>Where the stage <em>travels</em><br>with the show</h1>
+        <p class="hero-sub mx-auto">Body Art Cabaret brings a full evening of classic burlesque, aerial artistry, and hand-built visual spectacle to theaters, lounges, and festival stages across the region — one city at a time.</p>
+        <div class="d-flex flex-wrap gap-3 justify-content-center mt-4">
+          <a href="#booking" class="btn btn-gold">Book The Troupe</a>
+          <a href="#tour" class="btn btn-outline-gold">See The Route</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="bulb-row" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="eyebrow">THE COMPANY</div>
+        <h2 class="section-title">A cabaret built to move</h2>
+        <p class="lede">Body Art Cabaret is an independent ensemble of performers — dancers, aerialists, costumers, and visual artists — who build a new night of theater in every city they play. Rather than touring a single fixed act, the company reworks its show around each venue: a black-box theater gets an intimate hour of classic tease and reveal, while a festival stage might bring aerial rig work, live paint, and a full band.</p>
+        <p class="lede">What stays constant is the craft. Every costume, set piece, and routine is built by hand by the company itself, and every stop on the route gets a show designed specifically for that room.</p>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="frame-badge"><span class="num">HAND-BUILT</span>COSTUME &amp; SET WORK</div>
+          </div>
+          <div class="col-6">
+            <div class="frame-badge"><span class="num">ROOM-SPECIFIC</span>SHOWS EVERY STOP</div>
+          </div>
+          <div class="col-6">
+            <div class="frame-badge"><span class="num">LIVE</span>MUSIC &amp; NARRATION</div>
+          </div>
+          <div class="col-6">
+            <div class="frame-badge"><span class="num">ALL AGES</span>OF STAGE CRAFT</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTS -->
+<section id="acts" class="section-velvet">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="eyebrow">THE ACTS</div>
+      <h2 class="section-title">One evening, several disciplines</h2>
+      <p class="lede mx-auto">Each performance is assembled from a rotating repertoire, so no two stops on the route look quite the same.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="act-card">
+          <i class="fa-solid fa-feather"></i>
+          <h3>Classic Burlesque</h3>
+          <p>Tease-and-reveal numbers built on old-world glamour, feathered fans, and hand-sewn costume reveals.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="act-card">
+          <i class="fa-solid fa-ring"></i>
+          <h3>Aerial &amp; Circus Arts</h3>
+          <p>Silks, lyra, and rope work woven into the narrative arc of the show rather than staged as separate stunts.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="act-card">
+          <i class="fa-solid fa-music"></i>
+          <h3>Live Music &amp; Cabaret</h3>
+          <p>A live vocalist or small band anchors the room, trading the recorded-track feel for something built for that night.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="act-card">
+          <i class="fa-solid fa-palette"></i>
+          <h3>Visual Spectacle</h3>
+          <p>Body paint, projection, and hand-built set pieces turn the stage itself into part of the performance.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOUR -->
+<section id="tour" class="section-plum">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="eyebrow">ON TOUR</div>
+        <h2 class="section-title">The route</h2>
+        <p class="lede">Body Art Cabaret plays a rotating circuit of theaters, lounges, and festival stages. Routes are booked in seasonal legs — reach out to bring the full show, or a scaled-down set, to your venue.</p>
+        <a href="#booking" class="btn btn-outline-gold mt-2">Request A Date</a>
+      </div>
+      <div class="col-lg-8">
+        <div class="route">
+          <div class="stop">
+            <div class="stop-label">LEG ONE</div>
+            <h3>Southeast Theater Circuit</h3>
+            <p>Intimate black-box and historic-theater dates built around the classic burlesque repertoire.</p>
+          </div>
+          <div class="stop">
+            <div class="stop-label">LEG TWO</div>
+            <h3>Festival & Outdoor Stages</h3>
+            <p>Larger productions with aerial rigging, live band, and extended visual-spectacle set pieces.</p>
+          </div>
+          <div class="stop">
+            <div class="stop-label">LEG THREE</div>
+            <h3>Private &amp; Late-Night Bookings</h3>
+            <p>Scaled shows built for lounges, private events, and after-hours venues along the route.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="section-velvet">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="eyebrow">A LOOK BACKSTAGE</div>
+      <h2 class="section-title">From the road</h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-3">
+        <div class="swatch sw1"><div class="cap">Opening Number</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="swatch sw2"><div class="cap">Costume Build</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="swatch sw3"><div class="cap">Aerial Rig Check</div></div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="swatch sw4"><div class="cap">Load-Out</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking" class="booking">
+  <div class="container">
+    <div class="eyebrow">BOOK THE TROUPE</div>
+    <h2>Bring the show to your city</h2>
+    <p class="lede mx-auto">Theaters, festivals, and private events — tell us about your room and your date, and we'll build a set to match it.</p>
+    <a href="mailto:booking@bodyartcabaret.example" class="btn btn-gold mt-3">Send A Booking Inquiry</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="navbar-brand d-inline-block mb-3">BODY ART <span>CABARET</span></div>
+        <p>A traveling company of burlesque, aerial, and visual performance, built new for every stage it plays.</p>
+      </div>
+      <div class="col-lg-4">
+        <h4>MORE IN LIVE PERFORMANCE</h4>
+        <p>If artful cabaret is your thing, the wider circuit is worth exploring too — from vaudeville-revival burlesque troupes to touring aerial and circus-arts companies like Gilded Lily Burlesque, and the broader neo-burlesque and modern circus scenes playing theaters and festivals nationwide.</p>
+      </div>
+      <div class="col-lg-4">
+        <h4>ELSEWHERE ON THE CIRCUIT</h4>
+        <p>For Charleston after-dark bookings outside the cabaret world, <a href="https://michaelatyourplace.com" target="_blank" rel="noopener">Michael At Your Place</a> covers private party entertainment.</p>
+      </div>
+    </div>
+    <div class="footer-note d-flex flex-wrap justify-content-between gap-2">
+      <span>&copy; <span id="year"></span> Body Art Cabaret. All rights reserved.</span>
+      <span>Independent traveling performance company</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
